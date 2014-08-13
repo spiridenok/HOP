@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]C:\Localdata\dspi\HOP\test_cs\test_cs\test_cs\test_cs.csproj</TopNode>
+  <SelectedNode>[0-1011]test_cs.TestThreads.CreateThread()</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]C:\Localdata\dspi\HOP\test_cs\test_cs\test_cs\test_cs.csproj" Expanded="true" />
+    <Node UniqueName="[0-1012]C:\Localdata\dspi\HOP\test_cs\test_cs\test_cs\bin\Debug\test_cs.exe" Expanded="true" />
+    <Node UniqueName="[0-1013]test_cs" Expanded="true" />
+    <Node UniqueName="[0-1006]test_cs.Test0mq" Expanded="true" />
+    <Node UniqueName="[0-1007]test_cs.Test0mq.InitTest" Expanded="true" />
+    <Node UniqueName="[0-1001]test_cs.TestBlowfish" Expanded="true" />
+    <Node UniqueName="[0-1004]test_cs.TestBlowfish.CorruptDecodeTest" Expanded="true" />
+    <Node UniqueName="[0-1002]test_cs.TestBlowfish.RoundTripTest" Expanded="true" />
+    <Node UniqueName="[0-1009]test_cs.TestThreads" Expanded="true" />
+    <Node UniqueName="[0-1010]test_cs.TestThreads.CreateThread" Expanded="true" />
+  </Nodes>
+</VisualState>

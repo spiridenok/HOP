@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Localdata\dspi\HOP\test_cs\test_cs\test_cs\test_cs.csproj" total="4" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2014-01-07" time="22:42:33">
+  <environment nunit-version="2.6.3.13283" clr-version="2.0.50727.5472" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Localdata\dspi\HOP\test_cs\test_cs\test_cs" machine-name="LT335531" user="dspirydz" user-domain="ASML-COM" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Project" name="C:\Localdata\dspi\HOP\test_cs\test_cs\test_cs\test_cs.csproj" executed="True" result="Failure" success="False" time="0.222" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="C:\Localdata\dspi\HOP\test_cs\test_cs\test_cs\bin\Debug\test_cs.exe" executed="True" result="Failure" success="False" time="0.203" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="test_cs" executed="True" result="Failure" success="False" time="0.203" asserts="0">
+            <results>
+              <test-suite type="TestFixture" name="Test0mq" executed="True" result="Success" success="True" time="0.118" asserts="0">
+                <results>
+                  <test-suite type="ParameterizedTest" name="InitTest" executed="True" result="Success" success="True" time="0.109" asserts="0">
+                    <results>
+                      <test-case name="test_cs.Test0mq.InitTest()" executed="True" result="Success" success="True" time="0.100" asserts="0" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="TestBlowfish" executed="True" result="Success" success="True" time="0.038" asserts="0">
+                <results>
+                  <test-suite type="ParameterizedTest" name="CorruptDecodeTest" executed="True" result="Success" success="True" time="0.029" asserts="0">
+                    <results>
+                      <test-case name="test_cs.TestBlowfish.CorruptDecodeTest()" executed="True" result="Success" success="True" time="0.028" asserts="1" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="ParameterizedTest" name="RoundTripTest" executed="True" result="Success" success="True" time="0.002" asserts="0">
+                    <results>
+                      <test-case name="test_cs.TestBlowfish.RoundTripTest()" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="TestThreads" executed="True" result="Failure" success="False" time="0.027" asserts="0">
+                <results>
+                  <test-suite type="ParameterizedTest" name="CreateThread" executed="True" result="Failure" success="False" time="0.027" asserts="0">
+                    <results>
+                      <test-case name="test_cs.TestThreads.CreateThread()" executed="True" result="Failure" success="False" time="0.026" asserts="1">
+                        <failure>
+                          <message><![CDATA[  Expected: 2
+  But was:  1
+]]></message>
+                          <stack-trace><![CDATA[at test_cs.TestThreads.CreateThread() in c:\Localdata\dspi\HOP\test_cs\test_cs\test_cs\Main.cs:line 94
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
