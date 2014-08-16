@@ -7,5 +7,7 @@ namespace HOP.Storage.API
         void OpenConnection(IConfiguration config);
 
         void CloseConnection( );
+
+        IStorageDir GetRootDir();
     }
 }

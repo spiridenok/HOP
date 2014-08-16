@@ -35,5 +35,10 @@ namespace HOP.Storage.DropBox
         {
             dropBoxStorage.Close();
         }
+
+        public IStorageDir GetRootDir()
+        {
+            return new DropBoxStorageDir( dropBoxStorage.GetRoot() );
+        }
     }
 }
