@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HOP.NameEncoder;
+using HOP.NameEncoder.API;
 
 namespace NameEncoderTest
 {
@@ -10,7 +11,7 @@ namespace NameEncoderTest
         [TestMethod]
         public void TestLatinName()
         {
-            NameEncoder ne = new NameEncoder();
+            INameEncoder ne = new NameEncoder();
             const string test_string = "Test string";
             string encoded_string = ne.EncodeString(test_string);
             string decoded_string = ne.DecodeString(encoded_string);
@@ -26,7 +27,7 @@ namespace NameEncoderTest
         [TestMethod]
         public void TestCyrillicName()
         {
-            NameEncoder ne = new NameEncoder();
+            INameEncoder ne = new NameEncoder();
             const string test_string = "Test строка";
             string encoded_string = ne.EncodeString(test_string);
             string decoded_string = ne.DecodeString(encoded_string);
