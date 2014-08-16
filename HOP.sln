@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HOP", "HOP.csproj", "{7450E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameEncoderTest", "NameEncoderTest\NameEncoderTest.csproj", "{0B73180C-D770-45D1-AEC1-0838F1BDF355}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropBoxStorageTest", "DropBoxStorageTest\DropBoxStorageTest.csproj", "{9EFFD68B-E45D-455D-9CA0-AC49073D87CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{0B73180C-D770-45D1-AEC1-0838F1BDF355}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B73180C-D770-45D1-AEC1-0838F1BDF355}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B73180C-D770-45D1-AEC1-0838F1BDF355}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EFFD68B-E45D-455D-9CA0-AC49073D87CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EFFD68B-E45D-455D-9CA0-AC49073D87CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EFFD68B-E45D-455D-9CA0-AC49073D87CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EFFD68B-E45D-455D-9CA0-AC49073D87CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
