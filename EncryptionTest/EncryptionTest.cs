@@ -3,9 +3,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using HOP.Encryption.API;
 using HOP.Encryption;
+using HOP.Configuartion.API;
 
 namespace EncryptionTest
 {
+    public class TestConfiguration:IConfiguration
+    {
+        public string GetTokenFilePath()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetKeyFilePath()
+        {
+            // This is not the file with the real key, just something for testing...
+            return "../../TwoFish.Key";
+        }
+    }
+
     [TestClass]
     public class EncryptionTest
     {
@@ -14,7 +29,7 @@ namespace EncryptionTest
         {
             string test_string = "Some string to encrypt";
 
-            IEncryption enc = new TwoFishEncryption();
+            IEncryption enc = new TwoFishEncryption( new TestConfiguration() );
 
             string encrypted_string = enc.Encrypt(test_string);
             string decrypted_string = enc.Decrypt(encrypted_string);
