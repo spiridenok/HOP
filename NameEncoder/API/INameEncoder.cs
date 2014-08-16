@@ -7,8 +7,8 @@ namespace HOP.NameEncoder.API
 {
     interface INameEncoder
     {
-        string EncodeString( string str );
+        string Encode( string str );
 
-        string DecodeString( string str );
+        string Decode( string str );
     }
 }

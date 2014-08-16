@@ -11,7 +11,7 @@ namespace HOP
         static void Main( )
         {
             var ne =  new NameEncoder.NameEncoder();
-            ne.EncodeString("bla");
+            ne.Encode("bla");
         }
     }
 }

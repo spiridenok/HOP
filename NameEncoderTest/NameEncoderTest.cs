@@ -13,8 +13,8 @@ namespace NameEncoderTest
         {
             INameEncoder ne = new NameEncoder();
             const string test_string = "Test string";
-            string encoded_string = ne.EncodeString(test_string);
-            string decoded_string = ne.DecodeString(encoded_string);
+            string encoded_string = ne.Encode(test_string);
+            string decoded_string = ne.Decode(encoded_string);
 
             Console.WriteLine("test:'{0}', encoded:'{1}', decoded:'{2}'",
                 test_string, encoded_string, decoded_string);
@@ -29,8 +29,8 @@ namespace NameEncoderTest
         {
             INameEncoder ne = new NameEncoder();
             const string test_string = "Test строка";
-            string encoded_string = ne.EncodeString(test_string);
-            string decoded_string = ne.DecodeString(encoded_string);
+            string encoded_string = ne.Encode(test_string);
+            string decoded_string = ne.Decode(encoded_string);
 
             Console.WriteLine("test:'{0}', encoded:'{1}', decoded:'{2}'",
                 test_string, encoded_string, decoded_string);

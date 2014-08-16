@@ -15,7 +15,7 @@ namespace HOP.NameEncoder
         {
         }
 
-        public string EncodeString(string str)
+        public string Encode(string str)
         {
             byte[] bytes = System.Text.Encoding.Unicode.GetBytes(str);
 
@@ -33,7 +33,7 @@ namespace HOP.NameEncoder
             return System.Text.Encoding.Unicode.GetString(bytes);
         }
 
-        public string DecodeString(string str)
+        public string Decode(string str)
         {
             byte[] bytes = System.Text.Encoding.Unicode.GetBytes(str);
 
