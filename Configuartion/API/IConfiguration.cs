@@ -3,5 +3,6 @@
     interface IConfiguration
     {
         string GetTokenFilePath();
+        string GetKeyFilePath();
     }
 }

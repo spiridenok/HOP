@@ -39,6 +39,11 @@
   <ItemGroup>
     <Compile Include="Configuartion\API\IConfiguration.cs" />
     <Compile Include="Configuartion\Configuration.cs" />
+    <Compile Include="Encryption\API\IEncryption.cs" />
+    <Compile Include="Encryption\TwoFishEncryption.cs" />
+    <Compile Include="External\Twofish\Twofish.cs" />
+    <Compile Include="External\Twofish\TwofishBase.cs" />
+    <Compile Include="External\Twofish\TwofishEncryption.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="NameEncoder\API\INameEncoder.cs" />
     <Compile Include="NameEncoder\NameEncoder.cs" />

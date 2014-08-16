@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using ManyMonkeys.Cryptography;
+﻿using ManyMonkeys.Cryptography;
 using System.Security.Cryptography;
 
 namespace twofish

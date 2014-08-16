@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3D2494C9-F221-43C5-AC4C-D8E67AE3D5C2}</ProjectGuid>
+    <ProjectGuid>{FEA5657B-9A55-4697-8FCE-5A16549B2FAD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>twofish</RootNamespace>
-    <AssemblyName>twofish</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>TwoFishKeyGenerator</RootNamespace>
+    <AssemblyName>TwoFishKeyGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,9 +43,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Twofish.cs" />
-    <Compile Include="TwofishBase.cs" />
-    <Compile Include="TwofishEncryption.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
