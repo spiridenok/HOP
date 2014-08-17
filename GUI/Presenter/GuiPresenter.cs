@@ -6,6 +6,9 @@ using System.Text;
 using HOP.GUI.Presenter.API;
 using HOP.GUI.View.API;
 
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("GuiTest")]
+
 namespace HOP.GUI.Presenter
 {
     class GuiPresenter:IPresenter
@@ -15,6 +18,7 @@ namespace HOP.GUI.Presenter
         public GuiPresenter(IView view)
         {
             this.view = view;
+            view.SetConnectButtonState(true);
         }
 
         public Dictionary<string,List<string>> Connect()

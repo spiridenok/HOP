@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 using HOP.Encryption.API;
 
@@ -10,7 +11,6 @@ using System.Security.Cryptography;
 using HOP.Configuartion.API;
 
 using System.Runtime.CompilerServices;
-using System.IO;
 [assembly: InternalsVisibleTo("EncryptionTest")]
 
 namespace HOP.Encryption

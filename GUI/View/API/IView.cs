@@ -7,7 +7,7 @@ using HOP.GUI.Presenter.API;
 
 namespace HOP.GUI.View.API
 {
-    interface IView
+    public interface IView
     {
         void SetPresenter(IPresenter presenter);
         void SetConnectButtonState( bool active );
