@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using HOP.Encryption.API;
 using HOP.Encryption;
-using HOP.Configuartion.API;
+using HOP.Config.API;
 using System.IO;
 
 namespace EncryptionTest

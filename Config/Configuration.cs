@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using HOP.Configuartion.API;
+using HOP.Config.API;
 
 // DropBoxStorage is not a real unit test, so it requires real configuration.
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("DropBoxStorageTest")]
 
-namespace HOP.Configuartion
+namespace HOP.Config
 {
     class Configuration: IConfiguration
     {

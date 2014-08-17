@@ -1,10 +1,10 @@
-﻿using HOP.Configuartion.API;
+﻿using HOP.Config.API;
 
 namespace HOP.Storage.API
 {
     interface IStorage
     {
-        void OpenConnection(IConfiguration config);
+        void OpenConnection();
 
         void CloseConnection( );
 

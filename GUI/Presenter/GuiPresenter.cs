@@ -7,6 +7,8 @@ using HOP.GUI.Presenter.API;
 using HOP.GUI.View.API;
 
 using System.Runtime.CompilerServices;
+using HOP.Storage.API;
+using HOP.GUI.Model.API;
 [assembly: InternalsVisibleTo("GuiTest")]
 
 namespace HOP.GUI.Presenter
@@ -14,20 +16,19 @@ namespace HOP.GUI.Presenter
     class GuiPresenter:IPresenter
     {
         private IView view;
+        private IModel model;
 
-        public GuiPresenter(IView view)
+        // TODO: storage should be moved to the GUI model, presenter has nothing to do with that.
+        public GuiPresenter( IView view, IModel model )
         {
             this.view = view;
+            this.model = model;
             view.SetConnectButtonState(true);
         }
 
         public Dictionary<string,List<string>> Connect()
         {
-            Dictionary<string, List<string>> root_dir = new Dictionary<string, List<string>>();
-            List<string> sub_list = new List<string>();
-            sub_list.Add( "1st sub root node" );
-            root_dir.Add("1st root node", sub_list);
-            root_dir.Add("2nd root node", null);
+            var root_dir = model.Connect();
 
             view.SetConnectButtonState( false );
 

@@ -4,7 +4,7 @@ using System.Linq;
 
 using HOP.Storage.API;
 using HOP.Storage.DropBox;
-using HOP.Configuartion;
+using HOP.Config;
 
 namespace DropBoxStorageTest
 {
@@ -18,7 +18,7 @@ namespace DropBoxStorageTest
         {
             // Create connection here because it's not a real unit test 
             // but uses real connection to the real drop box folder
-            storage = new DropBoxStorage();
+            storage = new DropBoxStorage(new Configuration());
         }
 
         [ClassCleanup]
@@ -30,7 +30,7 @@ namespace DropBoxStorageTest
         [TestMethod]
         public void TestRootDir()
         {
-            storage.OpenConnection(new Configuration());
+            storage.OpenConnection();
 
             IStorageDir root_dir = storage.GetRootDir();
             Assert.IsNotNull(root_dir);

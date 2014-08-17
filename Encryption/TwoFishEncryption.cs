@@ -8,7 +8,7 @@ using HOP.Encryption.API;
 
 using ManyMonkeys.Cryptography;
 using System.Security.Cryptography;
-using HOP.Configuartion.API;
+using HOP.Config.API;
 
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("EncryptionTest")]

@@ -1,4 +1,4 @@
-﻿namespace HOP.Configuartion.API
+﻿namespace HOP.Config.API
 {
     interface IConfiguration
     {

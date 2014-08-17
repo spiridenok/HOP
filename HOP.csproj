@@ -40,13 +40,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuartion\API\IConfiguration.cs" />
-    <Compile Include="Configuartion\Configuration.cs" />
+    <Compile Include="Config\API\IConfiguration.cs" />
+    <Compile Include="Config\Configuration.cs" />
     <Compile Include="Encryption\API\IEncryption.cs" />
     <Compile Include="Encryption\TwoFishEncryption.cs" />
     <Compile Include="External\Twofish\Twofish.cs" />
     <Compile Include="External\Twofish\TwofishBase.cs" />
     <Compile Include="External\Twofish\TwofishEncryption.cs" />
+    <Compile Include="GUI\Model\GuiModel.cs" />
+    <Compile Include="GUI\Model\API\IModel.cs" />
     <Compile Include="GUI\Presenter\API\IPresenter.cs" />
     <Compile Include="GUI\Presenter\GuiPresenter.cs" />
     <Compile Include="GUI\View\API\IView.cs" />
@@ -92,9 +94,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI\Model\API\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="GUI\View\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
