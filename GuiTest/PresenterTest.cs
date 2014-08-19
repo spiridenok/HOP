@@ -17,51 +17,18 @@ namespace GuiTest
         {
         }
 
-        public bool connect_button_active = false;
+        public string connection_button_text;
 
-        public void SetConnectButtonState(bool active)
+        public void SetConnectionButtonText(string text)
         {
-            connect_button_active = active;
-        }
-    }
-
-    class TestStorageDir : IStorageDir
-    {
-        public string name;
-
-        public TestStorageDir(string name)
-        {
-            this.name = name;
+            connection_button_text = text;
         }
 
-        public IStorageElement[] GetElements()
-        {
-            return new TestStorageDir[] { new TestStorageDir(name + ".sub") };
-        }
+        public bool tree_cleared = false;
 
-        public string GetName()
+        public void ClearTree()
         {
-            return name;
-        }
-    }
-
-    class TestStorage : IStorage
-    {
-        public bool connection_open = false;
-
-        public void OpenConnection()
-        {
-            connection_open = true;
-        }
-
-        public void CloseConnection()
-        {
-            connection_open = false;
-        }
-
-        public IStorageDir GetRootDir()
-        {
-            return null;
+            tree_cleared = true;
         }
     }
 
@@ -84,7 +51,7 @@ namespace GuiTest
     {
         [TestMethod]
         // After initialization:
-        // - Connect button must be enabled
+        // - Connect button must be have text "Connecte"
         // - Presenter set correctly
         public void TestPresenterInitialization()
         {
@@ -92,14 +59,14 @@ namespace GuiTest
             TestModel test_model = new TestModel();
             IPresenter presenter = new GuiPresenter( test_view, test_model );
 
-            Assert.IsTrue(test_view.connect_button_active);
+            Assert.AreEqual("Connect", test_view.connection_button_text);
         }
 
         [TestMethod]
         // Connect must
         // - Perform connection to the storage
         // - Return listing of the root directory of the storage
-        // - Disable connect button
+        // - Change button to "Disconnect"
         public void TestPresenterConnect()
         {
             TestView test_view = new TestView();
@@ -108,11 +75,30 @@ namespace GuiTest
 
             var root_dir = presenter.Connect();
 
-            Assert.IsFalse(test_view.connect_button_active);
+            Assert.AreEqual( "Disconnect", test_view.connection_button_text );
 
             CollectionAssert.AreEqual( new string[]{"1.1", "1.2"}, root_dir.Keys.ToArray() );         
             CollectionAssert.AreEqual(new List<string>{ "2.1" }, root_dir.Values.ElementAt(0));
             Assert.AreEqual(null, root_dir.Values.ElementAt(1));
         }
+
+        [TestMethod]
+        // Disconnect must
+        // - Disconnect from the storage
+        // - Clear root directory tree
+        // - Change button to "Connect"
+        public void TestPresenterDisonnect()
+        {
+            TestView test_view = new TestView();
+            TestModel test_model = new TestModel();
+            IPresenter presenter = new GuiPresenter(test_view, test_model);
+
+            presenter.Connect();
+            presenter.Disconnect();
+
+            Assert.AreEqual("Connect", test_view.connection_button_text);
+            Assert.IsTrue(test_view.tree_cleared);
+        }
+
     }
 }

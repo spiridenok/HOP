@@ -43,6 +43,7 @@
             treeNode1});
             this.StorageTree.Size = new System.Drawing.Size(353, 419);
             this.StorageTree.TabIndex = 0;
+            this.StorageTree.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.StorageTree_BeforeExpand);
             this.StorageTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.StorageTree_AfterSelect);
             // 
             // ConnectButton

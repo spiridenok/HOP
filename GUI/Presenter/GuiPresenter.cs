@@ -18,21 +18,26 @@ namespace HOP.GUI.Presenter
         private IView view;
         private IModel model;
 
-        // TODO: storage should be moved to the GUI model, presenter has nothing to do with that.
         public GuiPresenter( IView view, IModel model )
         {
             this.view = view;
             this.model = model;
-            view.SetConnectButtonState(true);
+            view.SetConnectionButtonText("Connect");
         }
 
         public Dictionary<string,List<string>> Connect()
         {
             var root_dir = model.Connect();
 
-            view.SetConnectButtonState( false );
+            view.SetConnectionButtonText("Disconnect");
 
             return root_dir;
+        }
+
+        public void Disconnect()
+        {
+            view.SetConnectionButtonText("Connect");
+            view.ClearTree();
         }
     }
 }

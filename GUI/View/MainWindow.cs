@@ -36,8 +36,15 @@ namespace HOP.GUI.View
             }
         }
 
+        #region Button click operations
         private void ConnectButton_Click(object sender, EventArgs e)
         {
+            // FIXME: Pretty dirty dependency...
+            if (ConnectButton.Text == "Disconnect")
+            {
+                presenter.Disconnect();
+                return;
+            }
             Dictionary<string, List<string>> root_listing = presenter.Connect();
             TreeNode root = StorageTree.Nodes[0];
 
@@ -69,6 +76,31 @@ namespace HOP.GUI.View
                 System.Console.WriteLine("Opened file:" + dialog.FileName + ", size: " + file.Length);
             }
         }
+        #endregion
+
+        #region IView interface
+        public void SetConnectionButtonText( string text )
+        {
+            this.ConnectButton.Text = text;
+        }
+
+        public void SetPresenter(IPresenter presenter)
+        {
+            this.presenter = presenter;
+        }
+
+        public void ClearTree()
+        {
+            StorageTree.Nodes.Clear();
+            StorageTree.Nodes.Add( new TreeNode("Root Dir") ) ;
+        }
+        #endregion
+
+        #region TreeEvents
+        private void StorageTree_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            Console.WriteLine("Expanding {0}", e.Node.Text);
+        }
 
         private void StorageTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -78,17 +110,7 @@ namespace HOP.GUI.View
                 Console.WriteLine("Clicked on Node {0}", e.Node.Text);
             }
         }
-
-        #region IView interface
-        public void SetConnectButtonState( bool active )
-        {
-            this.ConnectButton.Enabled = active; 
-        }
-
-        public void SetPresenter(IPresenter presenter)
-        {
-            this.presenter = presenter;
-        }
         #endregion
+
     }
 }

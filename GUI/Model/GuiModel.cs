@@ -19,18 +19,18 @@ namespace HOP.GUI.Model
         public Dictionary<string, List<string>> Connect()
         {
             Dictionary<string, List<string>> root_dir = new Dictionary<string, List<string>>();
-            //List<string> sub_list = new List<string>();
-            //sub_list.Add("1st sub root node");
-            //root_dir.Add("1st root node", sub_list);
-            //root_dir.Add("2nd root node", null);
+            List<string> sub_list = new List<string>();
+            sub_list.Add("1st sub root node");
+            root_dir.Add("1st root node", sub_list);
+            root_dir.Add("2nd root node", null);
 
-            storage.OpenConnection();
-            IStorageDir storage_root_dir = storage.GetRootDir();
+            //storage.OpenConnection();
+            //IStorageDir storage_root_dir = storage.GetRootDir();
 
-            foreach (var el in storage_root_dir.GetElements() )
-            {
-                root_dir.Add(el.GetName(), null);
-            }
+            //foreach (var el in storage_root_dir.GetElements() )
+            //{
+            //    root_dir.Add(el.GetName(), null);
+            //}
 
             return root_dir;
         }

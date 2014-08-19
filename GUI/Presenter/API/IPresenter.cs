@@ -7,6 +7,9 @@ namespace HOP.GUI.Presenter.API
 {
     public interface IPresenter
     {
+        // Returns the root directory of the connected storage.
         Dictionary<string,List<string>> Connect();
+
+        void Disconnect();
     }
 }

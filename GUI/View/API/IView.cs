@@ -10,6 +10,7 @@ namespace HOP.GUI.View.API
     public interface IView
     {
         void SetPresenter(IPresenter presenter);
-        void SetConnectButtonState( bool active );
+        void SetConnectionButtonText( string text );
+        void ClearTree();
     }
 }
