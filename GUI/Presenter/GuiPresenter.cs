@@ -23,6 +23,8 @@ namespace HOP.GUI.Presenter
             this.view = view;
             this.model = model;
             view.SetConnectionButtonText("Connect");
+            view.SetAddFilesButton(false);
+            view.SetUploadButton(false);
         }
 
         public Dictionary<string,List<string>> Connect()
@@ -30,6 +32,8 @@ namespace HOP.GUI.Presenter
             var root_dir = model.Connect();
 
             view.SetConnectionButtonText("Disconnect");
+            view.SetAddFilesButton(true);
+            view.SetUploadButton(true);
 
             return root_dir;
         }
@@ -38,6 +42,13 @@ namespace HOP.GUI.Presenter
         {
             view.SetConnectionButtonText("Connect");
             view.ClearTree();
+            view.SetAddFilesButton(false);
+            view.SetUploadButton(false);
+        }
+
+        public void AddFileToUpload(string path_to_file)
+        {
+            model.AddFileToUpload(path_to_file);
         }
     }
 }

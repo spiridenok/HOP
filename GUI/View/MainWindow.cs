@@ -72,9 +72,22 @@ namespace HOP.GUI.View
 
             if (result == DialogResult.OK)
             {
-                byte[] file = File.ReadAllBytes(dialog.FileName);
-                System.Console.WriteLine("Opened file:" + dialog.FileName + ", size: " + file.Length);
+//                byte[] file = File.ReadAllBytes(dialog.FileName);
+                System.Console.WriteLine("Opened file:" + dialog.FileName); // + ", size: " + file.Length);
             }
+
+            presenter.AddFileToUpload(dialog.FileName);
+            var new_node = new TreeNode("(*)" + Path.GetFileName(dialog.FileName));
+
+            StorageTree.SelectedNode.Expand();
+            StorageTree.SelectedNode.Nodes.Add(new_node);
+            StorageTree.SelectedNode = new_node;
+            StorageTree.Focus();
+        }
+
+        private void UploadButton_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -94,6 +107,17 @@ namespace HOP.GUI.View
             StorageTree.Nodes.Clear();
             StorageTree.Nodes.Add( new TreeNode("Root Dir") ) ;
         }
+
+        public void SetUploadButton(bool enable)
+        {
+            UploadButton.Enabled = enable;
+        }
+
+        public void SetAddFilesButton(bool enable)
+        {
+            AddButton.Enabled = enable;
+        }
+
         #endregion
 
         #region TreeEvents
@@ -111,6 +135,5 @@ namespace HOP.GUI.View
             }
         }
         #endregion
-
     }
 }

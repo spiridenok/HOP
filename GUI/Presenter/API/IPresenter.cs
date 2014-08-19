@@ -11,5 +11,7 @@ namespace HOP.GUI.Presenter.API
         Dictionary<string,List<string>> Connect();
 
         void Disconnect();
+
+        void AddFileToUpload(string path_to_file);
     }
 }

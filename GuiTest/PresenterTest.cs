@@ -30,6 +30,19 @@ namespace GuiTest
         {
             tree_cleared = true;
         }
+
+        public bool upload_button_enabled = true;
+        public void SetUploadButton(bool enable)
+        {
+            upload_button_enabled = enable;
+        }
+
+        public bool add_files_button_enabled = true;
+        public void SetAddFilesButton(bool enable)
+        {
+            add_files_button_enabled = enable;
+        }
+
     }
 
     class TestModel : IModel
@@ -44,6 +57,13 @@ namespace GuiTest
 
             return root_dir;
         }
+
+        public string file_path;
+
+        public void AddFileToUpload(string file_path)
+        {
+            this.file_path = file_path;
+        }
     }
 
     [TestClass]
@@ -51,8 +71,9 @@ namespace GuiTest
     {
         [TestMethod]
         // After initialization:
-        // - Connect button must be have text "Connecte"
         // - Presenter set correctly
+        // - Connect button must be have text "Connected"
+        // - "Upload" and "Add files" must be disabled
         public void TestPresenterInitialization()
         {
             TestView test_view = new TestView();
@@ -60,6 +81,8 @@ namespace GuiTest
             IPresenter presenter = new GuiPresenter( test_view, test_model );
 
             Assert.AreEqual("Connect", test_view.connection_button_text);
+            Assert.IsFalse(test_view.add_files_button_enabled);
+            Assert.IsFalse(test_view.upload_button_enabled);
         }
 
         [TestMethod]
@@ -67,6 +90,7 @@ namespace GuiTest
         // - Perform connection to the storage
         // - Return listing of the root directory of the storage
         // - Change button to "Disconnect"
+        // - "Upload" and "Add files" must be enabled
         public void TestPresenterConnect()
         {
             TestView test_view = new TestView();
@@ -80,6 +104,8 @@ namespace GuiTest
             CollectionAssert.AreEqual( new string[]{"1.1", "1.2"}, root_dir.Keys.ToArray() );         
             CollectionAssert.AreEqual(new List<string>{ "2.1" }, root_dir.Values.ElementAt(0));
             Assert.AreEqual(null, root_dir.Values.ElementAt(1));
+            Assert.IsTrue(test_view.add_files_button_enabled);
+            Assert.IsTrue(test_view.upload_button_enabled);
         }
 
         [TestMethod]
@@ -87,6 +113,7 @@ namespace GuiTest
         // - Disconnect from the storage
         // - Clear root directory tree
         // - Change button to "Connect"
+        // - "Upload" and "Add files" must be disabled
         public void TestPresenterDisonnect()
         {
             TestView test_view = new TestView();
@@ -98,7 +125,23 @@ namespace GuiTest
 
             Assert.AreEqual("Connect", test_view.connection_button_text);
             Assert.IsTrue(test_view.tree_cleared);
+            Assert.IsFalse(test_view.add_files_button_enabled);
+            Assert.IsFalse(test_view.upload_button_enabled);
         }
 
+        [TestMethod]
+        [Description("Adding file must pass the file name to the model")]
+        public void TestPresenterAddFile()
+        {
+            TestView test_view = new TestView();
+            TestModel test_model = new TestModel();
+            IPresenter presenter = new GuiPresenter(test_view, test_model);
+
+            presenter.Connect();
+            string test_file_path = "some path";
+            presenter.AddFileToUpload( test_file_path );
+
+            Assert.AreEqual(test_file_path, test_model.file_path);
+        }
     }
 }
