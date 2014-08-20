@@ -50,5 +50,10 @@ namespace HOP.GUI.Presenter
         {
             model.AddFileToUpload(hierarchy, path_to_file);
         }
+
+        public void Upload()
+        {
+            model.Upload();
+        }
     }
 }

@@ -42,7 +42,6 @@ namespace GuiTest
         {
             add_files_button_enabled = enable;
         }
-
     }
 
     class TestModel : IModel
@@ -65,6 +64,12 @@ namespace GuiTest
         {
             this.hierarchy = hierarchy;
             this.file_path = file_path;
+        }
+
+        public bool uploaded;
+        public void Upload()
+        {
+            uploaded = true;
         }
     }
 
@@ -146,6 +151,18 @@ namespace GuiTest
 
             Assert.AreEqual(test_file_path, test_model.file_path);
             Assert.AreEqual(test_hierarchy, test_model.hierarchy);
+        }
+
+        [TestMethod]
+        [Description("Upload must be sent to model")]
+        public void TestPresenterUpload()
+        {
+            TestView test_view = new TestView();
+            TestModel test_model = new TestModel();
+            IPresenter presenter = new GuiPresenter(test_view, test_model);
+
+            presenter.Upload();
+            Assert.IsTrue(test_model.uploaded);
         }
     }
 }

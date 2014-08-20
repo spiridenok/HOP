@@ -11,5 +11,7 @@ namespace HOP.GUI.Model.API
         Dictionary<string, List<string>> Connect();
 
         void AddFileToUpload( List<string> hierarchy, string file_path);
+
+        void Upload();
     }
 }

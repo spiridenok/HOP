@@ -19,9 +19,9 @@ namespace HOP
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Configuration config = new Configuration();
-            DropBoxStorage storage = new DropBoxStorage( config );
-            GuiModel model = new GuiModel(storage);
+            var config = new Configuration();
+            var storage = new DropBoxStorage( config );
+            var model = new GuiModel(storage);
             MainWindow main_window = new MainWindow();
             GuiPresenter presenter = new GuiPresenter( main_window, model );
             main_window.SetPresenter(presenter);

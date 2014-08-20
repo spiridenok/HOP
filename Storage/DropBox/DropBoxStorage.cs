@@ -9,6 +9,7 @@ using AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 using HOP.Config.API;
 
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 [assembly: InternalsVisibleTo("DropBoxStorageTest")]
 
 namespace HOP.Storage.DropBox
@@ -45,6 +46,10 @@ namespace HOP.Storage.DropBox
         public IStorageDir GetRootDir()
         {
             return new DropBoxStorageDir( dropBoxStorage.GetRoot() );
+        }
+
+        public void UploadFiles(List<Tuple<List<string>, string>> files_to_upload)
+        {
         }
     }
 }
