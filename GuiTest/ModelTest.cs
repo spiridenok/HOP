@@ -57,6 +57,14 @@ namespace GuiTest
             {
                 this.files_to_upload = files_to_upload;
             }
+
+            public List<string> GetDirListing(string dir_name)
+            {
+                return null;
+            }
+
+            public void ClearDir(string dir) { }
+            public void CreateDir(string dir) { }
         }
 
         [TestMethod]

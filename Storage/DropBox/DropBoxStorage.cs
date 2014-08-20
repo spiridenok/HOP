@@ -50,6 +50,43 @@ namespace HOP.Storage.DropBox
 
         public void UploadFiles(List<Tuple<List<string>, string>> files_to_upload)
         {
+            foreach( var file in files_to_upload )
+            {
+                string drop_box_dir = "";
+                foreach( var st in file.Item1 )
+                {
+                    drop_box_dir += st;
+                }
+
+                dropBoxStorage.UploadFile( file.Item2, dropBoxStorage.GetFolder(drop_box_dir));
+            }
+        }
+
+        public void ClearDir(string dir_name)
+        {
+            var storage_dir = dropBoxStorage.GetFolder("/" + dir_name);
+
+            foreach( var el in GetDirListing( dir_name ) )
+            {
+                dropBoxStorage.DeleteFileSystemEntry( dropBoxStorage.GetFileSystemObject( el, storage_dir ) );
+            }
+        }
+
+        public List<string> GetDirListing( string dir_name )
+        {
+            List<string> dir_list = new List<string>();
+            var storage_dir = new DropBoxStorageDir( dropBoxStorage.GetFolder(dir_name) );
+
+            foreach (var el in storage_dir.GetElements() )
+            {
+                dir_list.Add(el.GetName());
+            }
+            return dir_list;
+        }
+
+        public void CreateDir(string new_dir_name)
+        {
+            dropBoxStorage.CreateFolder(new_dir_name);
         }
     }
 }

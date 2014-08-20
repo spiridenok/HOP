@@ -8,10 +8,16 @@ namespace HOP.Storage.API
     {
         void OpenConnection();
 
-        void CloseConnection( );
+        void CloseConnection();
+
+        void ClearDir(string dir_name);
 
         IStorageDir GetRootDir();
 
         void UploadFiles( List< Tuple< List<string>, string > > files_to_upload );
+
+        List<string> GetDirListing( string dir_name );
+
+        void CreateDir(string new_dir_name);
     }
 }

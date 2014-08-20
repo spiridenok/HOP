@@ -5,6 +5,7 @@ using System.Linq;
 using HOP.Storage.API;
 using HOP.Storage.DropBox;
 using HOP.Config;
+using System.Collections.Generic;
 
 namespace DropBoxStorageTest
 {
@@ -43,6 +44,26 @@ namespace DropBoxStorageTest
 
             Assert.IsTrue(root_elements.Any(el => (el is IStorageDir)));
             Assert.IsTrue(root_elements.Any(el => (el is IStorageFile)));
+        }
+
+        [TestMethod]
+        public void TestUpload()
+        {
+            storage.OpenConnection();
+            storage.ClearDir("/Test");
+            storage.CreateDir("/Test/SubTest");
+
+            var files_to_upload = new List<Tuple<List<string>, string>>();
+            List<string> storage_dir = new []{"/Test"}.ToList();
+            files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.txt") );
+
+            storage_dir = new List<string>{ "/Test", "/SubTest" };
+            files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.exe"));
+
+            storage.UploadFiles(files_to_upload);
+
+            Assert.IsTrue( storage.GetDirListing("/Test").Contains( "test.txt" ) );
+            Assert.IsTrue( storage.GetDirListing("/Test/SubTest").Contains( "test.exe" ) );
         }
     }
 }
