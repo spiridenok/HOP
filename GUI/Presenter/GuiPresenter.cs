@@ -46,9 +46,9 @@ namespace HOP.GUI.Presenter
             view.SetUploadButton(false);
         }
 
-        public void AddFileToUpload(string path_to_file)
+        public void AddFileToUpload( List<string> hierarchy, string path_to_file)
         {
-            model.AddFileToUpload(path_to_file);
+            model.AddFileToUpload(hierarchy, path_to_file);
         }
     }
 }

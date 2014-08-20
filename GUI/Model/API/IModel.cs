@@ -10,6 +10,6 @@ namespace HOP.GUI.Model.API
         // Return the listing of the root directory + 1st level 
         Dictionary<string, List<string>> Connect();
 
-        void AddFileToUpload(string file_path);
+        void AddFileToUpload( List<string> hierarchy, string file_path);
     }
 }

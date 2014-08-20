@@ -35,7 +35,7 @@ namespace HOP.GUI.Model
             return root_dir;
         }
 
-        public void AddFileToUpload(string file_path)
+        public void AddFileToUpload( List<string> hierarchy, string path_to_file)
         {
         }
 

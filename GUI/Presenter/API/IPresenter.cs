@@ -12,6 +12,6 @@ namespace HOP.GUI.Presenter.API
 
         void Disconnect();
 
-        void AddFileToUpload(string path_to_file);
+        void AddFileToUpload( List<string> hierarchy, string path_to_file);
     }
 }

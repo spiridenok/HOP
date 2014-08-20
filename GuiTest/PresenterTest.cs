@@ -58,10 +58,12 @@ namespace GuiTest
             return root_dir;
         }
 
+        public List<string> hierarchy;
         public string file_path;
 
-        public void AddFileToUpload(string file_path)
+        public void AddFileToUpload( List<string> hierarchy, string file_path)
         {
+            this.hierarchy = hierarchy;
             this.file_path = file_path;
         }
     }
@@ -139,9 +141,11 @@ namespace GuiTest
 
             presenter.Connect();
             string test_file_path = "some path";
-            presenter.AddFileToUpload( test_file_path );
+            var test_hierarchy = new List<string>{"str1", "str2" };
+            presenter.AddFileToUpload( test_hierarchy, test_file_path );
 
             Assert.AreEqual(test_file_path, test_model.file_path);
+            Assert.AreEqual(test_hierarchy, test_model.hierarchy);
         }
     }
 }

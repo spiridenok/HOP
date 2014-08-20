@@ -76,7 +76,7 @@ namespace HOP.GUI.View
                 System.Console.WriteLine("Opened file:" + dialog.FileName); // + ", size: " + file.Length);
             }
 
-            presenter.AddFileToUpload(dialog.FileName);
+            presenter.AddFileToUpload(StorageTree.SelectedNode.FullPath.Split('\\').ToList(),dialog.FileName);
             var new_node = new TreeNode("(*)" + Path.GetFileName(dialog.FileName));
 
             StorageTree.SelectedNode.Expand();
