@@ -76,7 +76,8 @@ namespace HOP.GUI.View
                 System.Console.WriteLine("Opened file:" + dialog.FileName); // + ", size: " + file.Length);
             }
 
-            presenter.AddFileToUpload(StorageTree.SelectedNode.FullPath.Split('\\').ToList(),dialog.FileName);
+            string full_path = StorageTree.SelectedNode.FullPath.Replace( "Root Dir", string.Empty );
+            presenter.AddFileToUpload(full_path.Split('\\').ToList(),dialog.FileName);
             var new_node = new TreeNode("(*)" + Path.GetFileName(dialog.FileName));
 
             StorageTree.SelectedNode.Expand();
@@ -87,7 +88,7 @@ namespace HOP.GUI.View
 
         private void UploadButton_Click(object sender, EventArgs e)
         {
-
+            presenter.Upload();
         }
         #endregion
 

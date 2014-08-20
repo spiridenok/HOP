@@ -55,6 +55,9 @@ namespace HOP.Storage.DropBox
                 string drop_box_dir = "";
                 foreach( var st in file.Item1 )
                 {
+                    // TODO: this needs to be cleaned up
+                    if (!st.StartsWith("/") && st != "")
+                        drop_box_dir += "/";
                     drop_box_dir += st;
                 }
 

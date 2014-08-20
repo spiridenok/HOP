@@ -54,10 +54,10 @@ namespace DropBoxStorageTest
             storage.CreateDir("/Test/SubTest");
 
             var files_to_upload = new List<Tuple<List<string>, string>>();
-            List<string> storage_dir = new []{"/Test"}.ToList();
+            List<string> storage_dir = new []{"Test"}.ToList();
             files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.txt") );
 
-            storage_dir = new List<string>{ "/Test", "/SubTest" };
+            storage_dir = new List<string>{ "Test", "SubTest" };
             files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.exe"));
 
             storage.UploadFiles(files_to_upload);
