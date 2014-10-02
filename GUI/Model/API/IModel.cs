@@ -15,5 +15,7 @@ namespace HOP.GUI.Model.API
         void Upload();
 
         bool IsDirectory(string name);
+
+        void DownloadFile(List<string> file_path);
     }
 }

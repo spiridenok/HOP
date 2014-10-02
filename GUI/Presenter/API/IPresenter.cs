@@ -14,8 +14,9 @@ namespace HOP.GUI.Presenter.API
 
         void AddFileToUpload( List<string> hierarchy, string path_to_file);
 
-        void Upload();
+        // TODO: dirty hack - this function return true if upload, false if download
+        bool LoadAction();
 
-        void NodeSelected(string node_name);
+        void NodeSelected( List<string> path_to_file );
     }
 }

@@ -80,6 +80,11 @@ namespace GuiTest
         {
             return name == "1.1";
         }
+
+        public void DownloadFile(List<string>file_path)
+        {
+            this.hierarchy = file_path;
+        }
     }
 
     [TestClass]
@@ -89,8 +94,8 @@ namespace GuiTest
         // After initialization:
         // - Presenter set correctly
         // - Connect button must be have text "Connected"
-        // - "Upload button must have text "Encrypt and Upload"
-        // - "Upload" and "Add files" must be disabled
+        // - "LoadAction button must have text "Encrypt and LoadAction"
+        // - "LoadAction" and "Add files" must be disabled
         public void TestPresenterInitialization()
         {
             TestView test_view = new TestView();
@@ -98,7 +103,7 @@ namespace GuiTest
             IPresenter presenter = new GuiPresenter( test_view, test_model );
 
             Assert.AreEqual("Connect", test_view.connection_button_text);
-            Assert.AreEqual("Encrypt and Upload", test_view.load_button_text);
+            Assert.AreEqual("Encrypt and LoadAction", test_view.load_button_text);
             Assert.IsFalse(test_view.add_files_button_enabled);
             Assert.IsFalse(test_view.upload_button_enabled);
         }
@@ -108,7 +113,7 @@ namespace GuiTest
         // - Perform connection to the storage
         // - Return listing of the root directory of the storage
         // - Change button to "Disconnect"
-        // - "Upload" and "Add files" must be enabled
+        // - "LoadAction" and "Add files" must be enabled
         public void TestPresenterConnect()
         {
             TestView test_view = new TestView();
@@ -131,7 +136,7 @@ namespace GuiTest
         // - Disconnect from the storage
         // - Clear root directory tree
         // - Change button to "Connect"
-        // - "Upload" and "Add files" must be disabled
+        // - "LoadAction" and "Add files" must be disabled
         public void TestPresenterDisonnect()
         {
             TestView test_view = new TestView();
@@ -165,15 +170,21 @@ namespace GuiTest
         }
 
         [TestMethod]
-        [Description("Upload must be sent to model")]
+        [Description("If a directory is selected the files must be uploaded, if a file is selected - downloaded")]
         public void TestPresenterUpload()
         {
             TestView test_view = new TestView();
             TestModel test_model = new TestModel();
             IPresenter presenter = new GuiPresenter(test_view, test_model);
 
-            presenter.Upload();
+            presenter.NodeSelected(new List<string>{"1.1"});
+            presenter.LoadAction();
             Assert.IsTrue(test_model.uploaded);
+
+            test_model.uploaded = false;
+            presenter.NodeSelected(new List<string>{"2.1"});
+            presenter.LoadAction();
+            Assert.IsFalse(test_model.uploaded);
         }
 
         [TestMethod]
@@ -186,16 +197,16 @@ namespace GuiTest
 
             presenter.Connect();
 
-            presenter.NodeSelected("2.1");
+            presenter.NodeSelected(new List<string> { "2.1" });
             Assert.IsFalse(test_view.add_files_button_enabled);
-            presenter.NodeSelected("1.1");
+            presenter.NodeSelected(new List<string> { "1.1" });
             Assert.IsTrue(test_view.add_files_button_enabled);
-            presenter.NodeSelected("1.2");
+            presenter.NodeSelected(new List<string> { "1.2" });
             Assert.IsFalse(test_view.add_files_button_enabled);
         }
 
         [TestMethod]
-        [Description("'Upload' for directories, 'Download' for files")]
+        [Description("'LoadAction' for directories, 'Download' for files")]
         public void TestLoadButtonText()
         {
             TestView test_view = new TestView();
@@ -204,12 +215,29 @@ namespace GuiTest
 
             presenter.Connect();
 
-            presenter.NodeSelected("2.1");
+            presenter.NodeSelected(new List<string> { "2.1" });
             Assert.AreEqual("Decrypt and Download", test_view.load_button_text);
-            presenter.NodeSelected("1.1");
-            Assert.AreEqual("Encrypt and Upload", test_view.load_button_text);
-            presenter.NodeSelected("1.2");
+            presenter.NodeSelected(new List<string> { "1.1" });
+            Assert.AreEqual("Encrypt and LoadAction", test_view.load_button_text);
+            presenter.NodeSelected(new List<string> { "1.2" });
             Assert.AreEqual("Decrypt and Download", test_view.load_button_text);
+        }
+
+        [TestMethod]
+        [Description("Selected file must be downloaded")]
+        public void TestDownloadFile()
+        {
+            TestView test_view = new TestView();
+            TestModel test_model = new TestModel();
+            IPresenter presenter = new GuiPresenter(test_view, test_model);
+
+            presenter.Connect();
+
+            var test_file_path = new List<string> { "str1", "str2", "some file" };
+            presenter.NodeSelected(test_file_path);
+            presenter.LoadAction();
+
+            Assert.AreEqual(test_file_path, test_model.hierarchy);
         }
     }
 }

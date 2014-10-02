@@ -52,5 +52,10 @@ namespace HOP.GUI.Model
         {
             return storage.IsDirectory( name );
         }
+
+        public void DownloadFile(List<string> file_path)
+        {
+            storage.DownloadFile(file_path);
+        }
     }
 }

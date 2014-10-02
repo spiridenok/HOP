@@ -68,6 +68,12 @@ namespace GuiTest
             {
                 return node == "root dir";
             }
+
+            public List<string> download_file;
+            public void DownloadFile(List<string> file_path)
+            {
+                download_file = file_path;
+            }
         }
 
         [TestMethod]
@@ -131,6 +137,20 @@ namespace GuiTest
 
             Assert.IsTrue(model.IsDirectory(test_storage.GetRootDir().GetName()));
             Assert.IsFalse(model.IsDirectory("second") );
+        }
+
+        [TestMethod]
+        [Description("Specified file must be downloaded to the right location")]
+        public void TestDownloadFile()
+        {
+            var test_storage = new TestStorage();
+            var model = new GuiModel(test_storage);
+
+            model.Connect();
+
+            List<string> file_to_download = new List<string> { "/one/two/three" };
+            model.DownloadFile( file_to_download );
+            Assert.AreEqual( file_to_download, test_storage.download_file );
         }
     }
 }

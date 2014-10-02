@@ -72,7 +72,7 @@
             this.UploadButton.Name = "UploadButton";
             this.UploadButton.Size = new System.Drawing.Size(121, 46);
             this.UploadButton.TabIndex = 3;
-            this.UploadButton.Text = "Encrypt and Upload";
+            this.UploadButton.Text = "Encrypt and LoadAction";
             this.UploadButton.UseVisualStyleBackColor = true;
             this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 

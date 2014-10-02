@@ -97,5 +97,9 @@ namespace HOP.Storage.DropBox
             var el = dropBoxStorage.GetFileSystemObject(name, dropBoxStorage.GetFolder("/"));
             return el is ICloudDirectoryEntry;
         }
+
+        public void DownloadFile(List<string> file_path)
+        {
+        }
     }
 }

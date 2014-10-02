@@ -98,8 +98,16 @@ namespace HOP.GUI.View
 
         private void UploadButton_Click(object sender, EventArgs e)
         {
-            presenter.Upload();
-            ChangeTextForAllNodes(StorageTree.Nodes[0], "(*)", string.Empty);
+            // TODO: dirty hack - clean up the return value, it makes no sense.
+            if (presenter.LoadAction())
+                ChangeTextForAllNodes(StorageTree.Nodes[0], "(*)", string.Empty);
+            else
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.FileName = StorageTree.SelectedNode.Text;
+
+                DialogResult result = dialog.ShowDialog();
+            }
         }
         #endregion
 
@@ -149,7 +157,8 @@ namespace HOP.GUI.View
             if (e.Action == TreeViewAction.ByMouse)
             {
                 Console.WriteLine("Clicked on Node {0}", e.Node.Text);
-                presenter.NodeSelected(e.Node.Text);
+                // TODO: this should be the whole hierarhy, not just final file
+                presenter.NodeSelected(new List<string>{e.Node.Text});
             }
         }
         #endregion

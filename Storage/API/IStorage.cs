@@ -21,5 +21,7 @@ namespace HOP.Storage.API
         void CreateDir(string new_dir_name);
 
         bool IsDirectory(string name);
+
+        void DownloadFile(List<string> file_path);
     }
 }
