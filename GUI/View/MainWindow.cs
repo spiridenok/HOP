@@ -109,6 +109,11 @@ namespace HOP.GUI.View
             this.ConnectButton.Text = text;
         }
 
+        public void SetLoadButtonText(string text)
+        {
+            this.UploadButton.Text = text;
+        }
+
         public void SetPresenter(IPresenter presenter)
         {
             this.presenter = presenter;

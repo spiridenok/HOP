@@ -18,10 +18,14 @@ namespace GuiTest
         }
 
         public string connection_button_text;
-
         public void SetConnectionButtonText(string text)
         {
             connection_button_text = text;
+        }
+        public string load_button_text;
+        public void SetLoadButtonText(string text)
+        {
+            load_button_text = text;
         }
 
         public bool tree_cleared = false;
@@ -85,6 +89,7 @@ namespace GuiTest
         // After initialization:
         // - Presenter set correctly
         // - Connect button must be have text "Connected"
+        // - "Upload button must have text "Encrypt and Upload"
         // - "Upload" and "Add files" must be disabled
         public void TestPresenterInitialization()
         {
@@ -93,6 +98,7 @@ namespace GuiTest
             IPresenter presenter = new GuiPresenter( test_view, test_model );
 
             Assert.AreEqual("Connect", test_view.connection_button_text);
+            Assert.AreEqual("Encrypt and Upload", test_view.load_button_text);
             Assert.IsFalse(test_view.add_files_button_enabled);
             Assert.IsFalse(test_view.upload_button_enabled);
         }
@@ -186,6 +192,24 @@ namespace GuiTest
             Assert.IsTrue(test_view.add_files_button_enabled);
             presenter.NodeSelected("1.2");
             Assert.IsFalse(test_view.add_files_button_enabled);
+        }
+
+        [TestMethod]
+        [Description("'Upload' for directories, 'Download' for files")]
+        public void TestLoadButtonText()
+        {
+            TestView test_view = new TestView();
+            TestModel test_model = new TestModel();
+            IPresenter presenter = new GuiPresenter(test_view, test_model);
+
+            presenter.Connect();
+
+            presenter.NodeSelected("2.1");
+            Assert.AreEqual("Decrypt and Download", test_view.load_button_text);
+            presenter.NodeSelected("1.1");
+            Assert.AreEqual("Encrypt and Upload", test_view.load_button_text);
+            presenter.NodeSelected("1.2");
+            Assert.AreEqual("Decrypt and Download", test_view.load_button_text);
         }
     }
 }

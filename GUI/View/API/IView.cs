@@ -11,6 +11,7 @@ namespace HOP.GUI.View.API
     {
         void SetPresenter(IPresenter presenter);
         void SetConnectionButtonText( string text );
+        void SetLoadButtonText(string text);
         void ClearTree();
         void SetUploadButton(bool enable);
         void SetAddFilesButton(bool enable);

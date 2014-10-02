@@ -23,6 +23,7 @@ namespace HOP.GUI.Presenter
             this.view = view;
             this.model = model;
             view.SetConnectionButtonText("Connect");
+            view.SetLoadButtonText("Encrypt and Upload");
             view.SetAddFilesButton(false);
             view.SetUploadButton(false);
         }
@@ -60,9 +61,15 @@ namespace HOP.GUI.Presenter
         {
             Console.WriteLine("Selected node {0} is dir", node_name, model.IsDirectory(node_name));
             if (model.IsDirectory(node_name))
+            {
                 view.SetAddFilesButton(true);
+                view.SetLoadButtonText("Encrypt and Upload");
+            }
             else
+            {
                 view.SetAddFilesButton(false);
+                view.SetLoadButtonText("Decrypt and Download");
+            }
         }
     }
 }
