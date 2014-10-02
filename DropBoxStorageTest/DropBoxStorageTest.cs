@@ -17,9 +17,10 @@ namespace DropBoxStorageTest
         [ClassInitialize]
         public static void SetUp( TestContext ctx )
         {
-            // Create connection here because it's not a real unit test 
+            // TODO: Create connection here because it's not a real unit test 
             // but uses real connection to the real drop box folder
             storage = new DropBoxStorage(new Configuration());
+            storage.OpenConnection();
         }
 
         [ClassCleanup]
@@ -31,8 +32,6 @@ namespace DropBoxStorageTest
         [TestMethod]
         public void TestRootDir()
         {
-            storage.OpenConnection();
-
             IStorageDir root_dir = storage.GetRootDir();
             Assert.IsNotNull(root_dir);
 
@@ -49,7 +48,6 @@ namespace DropBoxStorageTest
         [TestMethod]
         public void TestUpload()
         {
-            storage.OpenConnection();
             storage.ClearDir("/Test");
             storage.CreateDir("/Test/SubTest");
 

@@ -86,9 +86,20 @@ namespace HOP.GUI.View
             StorageTree.Focus();
         }
 
+        // TODO: this code should actually be part of the presenter
+        private void ChangeTextForAllNodes(TreeNode root_node, string old_text, string new_text)
+        {
+            foreach (TreeNode node in root_node.Nodes)
+            {
+                node.Text = node.Text.Replace(old_text,new_text );
+                ChangeTextForAllNodes(node, old_text, new_text);
+            }
+        }
+
         private void UploadButton_Click(object sender, EventArgs e)
         {
             presenter.Upload();
+            ChangeTextForAllNodes(StorageTree.Nodes[0], "(*)", string.Empty);
         }
         #endregion
 

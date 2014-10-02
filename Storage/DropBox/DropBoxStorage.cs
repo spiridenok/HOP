@@ -61,7 +61,7 @@ namespace HOP.Storage.DropBox
                     drop_box_dir += st;
                 }
 
-                dropBoxStorage.UploadFile( file.Item2, dropBoxStorage.GetFolder(drop_box_dir));
+                dropBoxStorage.UploadFile(file.Item2, dropBoxStorage.GetFolder(drop_box_dir));
             }
         }
 
