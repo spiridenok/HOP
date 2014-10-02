@@ -91,5 +91,11 @@ namespace HOP.Storage.DropBox
         {
             dropBoxStorage.CreateFolder(new_dir_name);
         }
+
+        public bool IsDirectory(string name)
+        {
+            var el = dropBoxStorage.GetFileSystemObject(name, dropBoxStorage.GetFolder("/"));
+            return el is ICloudDirectoryEntry;
+        }
     }
 }

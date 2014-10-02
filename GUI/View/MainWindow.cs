@@ -144,6 +144,7 @@ namespace HOP.GUI.View
             if (e.Action == TreeViewAction.ByMouse)
             {
                 Console.WriteLine("Clicked on Node {0}", e.Node.Text);
+                presenter.NodeSelected(e.Node.Text);
             }
         }
         #endregion

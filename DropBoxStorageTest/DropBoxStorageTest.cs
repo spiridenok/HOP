@@ -45,6 +45,7 @@ namespace DropBoxStorageTest
             Assert.IsTrue(root_elements.Any(el => (el is IStorageFile)));
         }
 
+        // TODO: check why this test fails when executed with other tests
         [TestMethod]
         public void TestUpload()
         {
@@ -62,6 +63,21 @@ namespace DropBoxStorageTest
 
             Assert.IsTrue( storage.GetDirListing("/Test").Contains( "test.txt" ) );
             Assert.IsTrue( storage.GetDirListing("/Test/SubTest").Contains( "test.exe" ) );
+        }
+
+        [TestMethod]
+        public void TestDirectoryOrFile()
+        {
+            storage.ClearDir("/Test");
+            storage.CreateDir("/Test/SubTest");
+
+            var files_to_upload = new List<Tuple<List<string>, string>>();
+            List<string> storage_dir = new[] { "Test" }.ToList();
+            files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.txt"));
+
+            Assert.IsTrue( storage.IsDirectory("Test") );
+            Assert.IsFalse(storage.IsDirectory("Test/test.txt"));
+            Assert.IsTrue(storage.IsDirectory("Test/SubTest"));
         }
     }
 }

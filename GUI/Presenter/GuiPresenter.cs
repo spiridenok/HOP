@@ -55,5 +55,14 @@ namespace HOP.GUI.Presenter
         {
             model.Upload();
         }
+
+        public void NodeSelected(string node_name)
+        {
+            Console.WriteLine("Selected node {0} is dir", node_name, model.IsDirectory(node_name));
+            if (model.IsDirectory(node_name))
+                view.SetAddFilesButton(true);
+            else
+                view.SetAddFilesButton(false);
+        }
     }
 }

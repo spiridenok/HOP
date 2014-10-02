@@ -13,5 +13,7 @@ namespace HOP.GUI.Model.API
         void AddFileToUpload( List<string> hierarchy, string file_path);
 
         void Upload();
+
+        bool IsDirectory(string name);
     }
 }

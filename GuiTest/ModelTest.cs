@@ -41,7 +41,6 @@ namespace GuiTest
             {
                 connected = true;
             }
-
             public void CloseConnection()
             {
                 connected = false;
@@ -65,6 +64,10 @@ namespace GuiTest
 
             public void ClearDir(string dir) { }
             public void CreateDir(string dir) { }
+            public bool IsDirectory(string node)
+            {
+                return node == "root dir";
+            }
         }
 
         [TestMethod]
@@ -115,6 +118,19 @@ namespace GuiTest
 
             model.Upload();
             Assert.AreEqual(0, test_storage.files_to_upload.Count);
+        }
+
+        [TestMethod]
+        [Description("It must be possible to distinguish between a directory or a regular file in the storage")]
+        public void TestDirectoryOrFile()
+        {
+            var test_storage = new TestStorage();
+            var model = new GuiModel(test_storage);
+
+            model.Connect();
+
+            Assert.IsTrue(model.IsDirectory(test_storage.GetRootDir().GetName()));
+            Assert.IsFalse(model.IsDirectory("second") );
         }
     }
 }

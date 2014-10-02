@@ -19,5 +19,7 @@ namespace HOP.Storage.API
         List<string> GetDirListing( string dir_name );
 
         void CreateDir(string new_dir_name);
+
+        bool IsDirectory(string name);
     }
 }

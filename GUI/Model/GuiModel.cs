@@ -47,5 +47,10 @@ namespace HOP.GUI.Model
             storage.UploadFiles(files_to_upload);
             files_to_upload = new List<Tuple<List<string>, string>>();
         }
+
+        public bool IsDirectory(string name)
+        {
+            return storage.IsDirectory( name );
+        }
     }
 }

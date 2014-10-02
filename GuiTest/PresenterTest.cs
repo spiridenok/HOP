@@ -71,6 +71,11 @@ namespace GuiTest
         {
             uploaded = true;
         }
+        
+        public bool IsDirectory(string name)
+        {
+            return name == "1.1";
+        }
     }
 
     [TestClass]
@@ -163,6 +168,24 @@ namespace GuiTest
 
             presenter.Upload();
             Assert.IsTrue(test_model.uploaded);
+        }
+
+        [TestMethod]
+        [Description("'Add' button must be enabled only for directories")]
+        public void TestNodeTypeSelection()
+        {
+            TestView test_view = new TestView();
+            TestModel test_model = new TestModel();
+            IPresenter presenter = new GuiPresenter(test_view, test_model);
+
+            presenter.Connect();
+
+            presenter.NodeSelected("2.1");
+            Assert.IsFalse(test_view.add_files_button_enabled);
+            presenter.NodeSelected("1.1");
+            Assert.IsTrue(test_view.add_files_button_enabled);
+            presenter.NodeSelected("1.2");
+            Assert.IsFalse(test_view.add_files_button_enabled);
         }
     }
 }

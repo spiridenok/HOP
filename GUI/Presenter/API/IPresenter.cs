@@ -15,5 +15,7 @@ namespace HOP.GUI.Presenter.API
         void AddFileToUpload( List<string> hierarchy, string path_to_file);
 
         void Upload();
+
+        void NodeSelected(string node_name);
     }
 }
