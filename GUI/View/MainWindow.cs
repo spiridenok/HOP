@@ -74,15 +74,15 @@ namespace HOP.GUI.View
             {
 //                byte[] file = File.ReadAllBytes(dialog.FileName);
                 System.Console.WriteLine("Opened file:" + dialog.FileName); // + ", size: " + file.Length);
+
+                string full_path = StorageTree.SelectedNode.FullPath.Replace( "Root Dir", string.Empty );
+                presenter.AddFileToUpload(full_path.Split('\\').ToList(),dialog.FileName);
+                var new_node = new TreeNode("(*)" + Path.GetFileName(dialog.FileName));
+
+                StorageTree.SelectedNode.Expand();
+                StorageTree.SelectedNode.Nodes.Add(new_node);
+                StorageTree.SelectedNode = new_node;
             }
-
-            string full_path = StorageTree.SelectedNode.FullPath.Replace( "Root Dir", string.Empty );
-            presenter.AddFileToUpload(full_path.Split('\\').ToList(),dialog.FileName);
-            var new_node = new TreeNode("(*)" + Path.GetFileName(dialog.FileName));
-
-            StorageTree.SelectedNode.Expand();
-            StorageTree.SelectedNode.Nodes.Add(new_node);
-            StorageTree.SelectedNode = new_node;
             StorageTree.Focus();
         }
 
