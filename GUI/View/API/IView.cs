@@ -15,5 +15,7 @@ namespace HOP.GUI.View.API
         void ClearTree();
         void SetUploadButton(bool enable);
         void SetAddFilesButton(bool enable);
+
+        string GetFilePath(string default_name);
     }
 }

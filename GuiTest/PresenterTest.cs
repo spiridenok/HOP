@@ -46,6 +46,11 @@ namespace GuiTest
         {
             add_files_button_enabled = enable;
         }
+
+        public string GetFilePath(string default_name)
+        {
+            return "get" + default_name;
+        }
     }
 
     class TestModel : IModel

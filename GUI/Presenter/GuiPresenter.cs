@@ -63,6 +63,7 @@ namespace HOP.GUI.Presenter
             }
             else
             {
+                view.GetFilePath(node[0]);
                 model.DownloadFile(node);
                 return false;
             }

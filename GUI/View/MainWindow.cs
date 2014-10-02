@@ -101,13 +101,6 @@ namespace HOP.GUI.View
             // TODO: dirty hack - clean up the return value, it makes no sense.
             if (presenter.LoadAction())
                 ChangeTextForAllNodes(StorageTree.Nodes[0], "(*)", string.Empty);
-            else
-            {
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.FileName = StorageTree.SelectedNode.Text;
-
-                DialogResult result = dialog.ShowDialog();
-            }
         }
         #endregion
 
@@ -161,6 +154,20 @@ namespace HOP.GUI.View
                 presenter.NodeSelected(new List<string>{e.Node.Text});
             }
         }
+
+        public string GetFilePath(string default_name)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.FileName = default_name;
+
+            DialogResult result = dialog.ShowDialog();
+            if( result == DialogResult.OK )
+            {
+                return dialog.FileName;
+            }
+            return null;
+        }
+
         #endregion
     }
 }
