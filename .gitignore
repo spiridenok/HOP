@@ -6,3 +6,4 @@ lib
 nuget.exe
 test_big.pdf
 *.user
+DropBox.Token

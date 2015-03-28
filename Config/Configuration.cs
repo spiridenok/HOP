@@ -13,7 +13,7 @@ namespace HOP.Config
     {
         public string GetTokenFilePath()
         {
-            return @"c:\Users\dspirydz\Documents\DropBox.Token";
+            return @"e:\HOP\DropBox.Token";
         }
 
         public string GetKeyFilePath()
