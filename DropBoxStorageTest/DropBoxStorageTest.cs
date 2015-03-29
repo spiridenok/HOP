@@ -53,8 +53,8 @@ namespace DropBoxStorageTest
             storage.CreateDir("/Test/SubTest");
 
             List<string> storage_dir = new []{"Test"}.ToList();
-            storage_dir = new List<string>{ "Test", "SubTest" };
             var f1 = new StorageObject(storage_dir, @"..\..\test.txt"); 
+            storage_dir = new List<string>{ "Test", "SubTest" };
             var f2 = new StorageObject(storage_dir, @"..\..\test.exe");
 
             var files_to_upload = new List<IStorageObject>(){f1,f2};

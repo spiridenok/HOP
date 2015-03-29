@@ -94,10 +94,6 @@ namespace HOP.StorageObject
 
             System.IO.File.Copy(file_path, encrypted_file_path, overwrite:true);
 
-            // Encrypt the file
-            //var enc = new TwoFishEncryption(conf);
-            //byte[] encrypted_file = enc.Encrypt(File.ReadAllBytes(file.Item2));
-            //File.WriteAllBytes(new_file_path, encrypted_file);
             return encrypted_file_path;
         }
 

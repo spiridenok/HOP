@@ -62,7 +62,7 @@ namespace HOP.Storage.DropBox
 
             foreach( var el in GetDirListing( dir_name ) )
             {
-                //dropBoxStorage.DeleteFileSystemEntry( dropBoxStorage.GetFileSystemObject( el, storage_dir ) );
+                dropBoxStorage.DeleteFileSystemEntry(dropBoxStorage.GetFileSystemObject(el.getStoragePath(), storage_dir));
             }
         }
 
