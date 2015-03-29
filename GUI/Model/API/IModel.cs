@@ -16,6 +16,6 @@ namespace HOP.GUI.Model.API
 
         bool IsDirectory(string name);
 
-        void DownloadFile(List<string> file_path);
+        void DownloadFile(List<string> storage_path, string file_path);
     }
 }

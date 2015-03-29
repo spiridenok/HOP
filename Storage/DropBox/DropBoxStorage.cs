@@ -12,6 +12,7 @@ using HOP.Config.API;
 
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using HOP.Encryption;
 [assembly: InternalsVisibleTo("DropBoxStorageTest")]
 
 namespace HOP.Storage.DropBox
@@ -20,10 +21,12 @@ namespace HOP.Storage.DropBox
     {
         private CloudStorage dropBoxStorage;
         private string token_file_path;
+        private IConfiguration conf;
 
         public DropBoxStorage(IConfiguration config)
         {
             token_file_path = config.GetTokenFilePath();
+            conf = config;
         }
 
         public void OpenConnection()
@@ -70,7 +73,12 @@ namespace HOP.Storage.DropBox
                 var file_name = file.Item2.Split('\\').Last();
                 var str = ne.Encode(file_name);
                 var new_file_path = file.Item2.Replace(file_name, str);
-                System.IO.File.Copy(file.Item2, new_file_path, true);
+                //System.IO.File.Copy(file.Item2, new_file_path, true);
+
+                // Encrypt the file
+                var enc = new TwoFishEncryption(conf);
+                byte[] encrypted_file = enc.Encrypt(File.ReadAllBytes(file.Item2));
+                File.WriteAllBytes(new_file_path, encrypted_file);
 
                 dropBoxStorage.UploadFile(new_file_path, dropBoxStorage.GetFolder(drop_box_dir));
             }
@@ -107,12 +115,30 @@ namespace HOP.Storage.DropBox
 
         public bool IsDirectory(string name)
         {
-            var el = dropBoxStorage.GetFileSystemObject(name, dropBoxStorage.GetFolder("/"));
+            var ne = new NameEncoder.NameEncoder();
+            var str = ne.Encode(name);
+
+            var el = dropBoxStorage.GetFileSystemObject(str, dropBoxStorage.GetFolder("/"));
             return el is ICloudDirectoryEntry;
         }
 
-        public void DownloadFile(List<string> file_path)
+        public void DownloadFile(List<string> storage_path, string file_path)
         {
+            var enc = new TwoFishEncryption(conf);
+
+            var ne = new NameEncoder.NameEncoder();
+            var str = ne.Encode(storage_path[0]);
+
+            string tmp = System.IO.Path.GetTempPath();
+
+            // Download the file first
+            dropBoxStorage.DownloadFile("/" + str, tmp);
+
+            // Then decrypt it and save to the right dir
+            byte[] decrypted_file = enc.Decrypt(File.ReadAllBytes(tmp+str));
+            File.WriteAllBytes(file_path, decrypted_file);
+
+            File.Delete(tmp + str);
         }
     }
 }

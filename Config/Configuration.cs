@@ -19,7 +19,7 @@ namespace HOP.Config
 
         public string GetKeyFilePath()
         {
-            return @"c:\Users\dspirydz\Documents\TwoFish.Key";
+            return @"e:\HOP\EncryptionTest\TwoFish.Key";
         }
     }
 }

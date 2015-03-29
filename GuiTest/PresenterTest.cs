@@ -86,9 +86,9 @@ namespace GuiTest
             return name == "1.1";
         }
 
-        public void DownloadFile(List<string>file_path)
+        public void DownloadFile(List<string> storage_path, string file_path)
         {
-            this.hierarchy = file_path;
+            this.hierarchy = storage_path;
         }
     }
 

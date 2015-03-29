@@ -70,9 +70,9 @@ namespace GuiTest
             }
 
             public List<string> download_file;
-            public void DownloadFile(List<string> file_path)
+            public void DownloadFile(List<string> storage_path, string file_path)
             {
-                download_file = file_path;
+                download_file = storage_path;
             }
         }
 
@@ -149,7 +149,7 @@ namespace GuiTest
             model.Connect();
 
             List<string> file_to_download = new List<string> { "/one/two/three" };
-            model.DownloadFile( file_to_download );
+            model.DownloadFile( file_to_download, "" );
             Assert.AreEqual( file_to_download, test_storage.download_file );
         }
     }
