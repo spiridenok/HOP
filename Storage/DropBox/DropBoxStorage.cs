@@ -85,8 +85,17 @@ namespace HOP.Storage.DropBox
 
         public bool IsDirectory(string name)
         {
-            var el = dropBoxStorage.GetFileSystemObject(name, dropBoxStorage.GetFolder("/"));
-            return el is ICloudDirectoryEntry;
+            try
+            {
+                var el = dropBoxStorage.GetFileSystemObject(name, dropBoxStorage.GetFolder("/"));
+                return el != null && el is ICloudDirectoryEntry;
+            }
+            catch ( AppLimit.CloudComputing.SharpBox.Exceptions.SharpBoxException )
+            {
+                // TODO: this is dangerous because it assumes that exception is thrown 
+                // because it's name is encoded.
+                return false;
+            }
         }
 
         public void DownloadFile(List<string> storage_path, string file_path)

@@ -89,11 +89,13 @@ namespace DropBoxStorageTest
             storage.ClearDir("/Test");
             storage.CreateDir("/Test/SubTest");
 
-            var files_to_upload = new List<Tuple<List<string>, string>>();
+            var files_to_upload = new List<IStorageObject>();
             List<string> storage_dir = new[]{ "Test" }.ToList();
-            files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.txt"));
+            files_to_upload.Add(new StorageObject(storage_dir, @"..\\..\\test.txt"));
 
-            Assert.IsTrue( storage.IsDirectory("Test") );
+            storage.UploadFiles(files_to_upload);
+
+            Assert.IsTrue(storage.IsDirectory("Test"));
             Assert.IsFalse(storage.IsDirectory("Test/test.txt"));
             Assert.IsTrue(storage.IsDirectory("Test/SubTest"));
         }
