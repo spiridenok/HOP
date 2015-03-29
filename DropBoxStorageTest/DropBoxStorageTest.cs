@@ -6,9 +6,23 @@ using HOP.Storage.API;
 using HOP.Storage.DropBox;
 using HOP.Config;
 using System.Collections.Generic;
+using HOP.Config.API;
 
 namespace DropBoxStorageTest
 {
+    public class TestConfiguration : IConfiguration
+    {
+        public string GetTokenFilePath()
+        {
+            return @"e:\HOP\DropBox.Test.Token";
+        }
+
+        public string GetKeyFilePath()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     [TestClass]
     public class DropBoxStorageTest
     {
@@ -17,9 +31,9 @@ namespace DropBoxStorageTest
         [ClassInitialize]
         public static void SetUp( TestContext ctx )
         {
-            // TODO: Create connection here because it's not a real unit test 
-            // but uses real connection to the real drop box folder
-            storage = new DropBoxStorage(new Configuration());
+            // Create connection here because it's not a real unit test 
+            // but uses real connection to the real drop box folder.
+            storage = new DropBoxStorage(new TestConfiguration());
             storage.OpenConnection();
         }
 
@@ -35,7 +49,7 @@ namespace DropBoxStorageTest
             IStorageDir root_dir = storage.GetRootDir();
             Assert.IsNotNull(root_dir);
 
-            // Because we dont know how many elements there will be in the real root folder
+            // Because we don't know how many elements there will be in the real root folder
             // (another reason to use a dummy drop box implementation or at least 
             // use a test storage which is different from the production storage)
             // we just assert here that there should be at least 1 directory and at least 1 test file.
@@ -72,7 +86,7 @@ namespace DropBoxStorageTest
             storage.CreateDir("/Test/SubTest");
 
             var files_to_upload = new List<Tuple<List<string>, string>>();
-            List<string> storage_dir = new[] { "Test" }.ToList();
+            List<string> storage_dir = new[]{ "Test" }.ToList();
             files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.txt"));
 
             Assert.IsTrue( storage.IsDirectory("Test") );

@@ -9,7 +9,7 @@ using System.IO;
 
 namespace EncryptionTest
 {
-    public class TestConfiguration:IConfiguration
+    public class TestConfiguration: IConfiguration
     {
         public string GetTokenFilePath()
         {

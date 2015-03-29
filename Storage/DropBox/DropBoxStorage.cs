@@ -86,7 +86,9 @@ namespace HOP.Storage.DropBox
 
         public void ClearDir(string dir_name)
         {
-            var storage_dir = dropBoxStorage.GetFolder("/" + dir_name);
+            var storage_dir = dropBoxStorage.GetFolder("/" + dir_name, throwException: false);
+
+            if (storage_dir == null) return; // Dir does not exist yet, nothing to clear.
 
             foreach( var el in GetDirListing( dir_name ) )
             {
