@@ -1,9 +1,13 @@
 ﻿using HOP.GUI.Model.API;
 using HOP.Storage.API;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+// TODO: this should be replaced by the interface & dep. injection
+using HOP.NameEncoder;
 
 namespace HOP.GUI.Model
 {

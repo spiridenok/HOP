@@ -1,5 +1,7 @@
 ﻿using System;
 
+using System.Linq;
+
 using HOP.Storage.API;
 
 using AppLimit.CloudComputing.SharpBox;
@@ -53,15 +55,24 @@ namespace HOP.Storage.DropBox
             foreach( var file in files_to_upload )
             {
                 string drop_box_dir = "";
+                var ne = new NameEncoder.NameEncoder();
+
                 foreach( var st in file.Item1 )
                 {
                     // TODO: this needs to be cleaned up
                     if (!st.StartsWith("/") && st != "")
                         drop_box_dir += "/";
                     drop_box_dir += st;
+
                 }
 
-                dropBoxStorage.UploadFile(file.Item2, dropBoxStorage.GetFolder(drop_box_dir));
+                // Obfuscate the name
+                var file_name = file.Item2.Split('\\').Last();
+                var str = ne.Encode(file_name);
+                var new_file_path = file.Item2.Replace(file_name, str);
+                System.IO.File.Copy(file.Item2, new_file_path, true);
+
+                dropBoxStorage.UploadFile(new_file_path, dropBoxStorage.GetFolder(drop_box_dir));
             }
         }
 
@@ -82,6 +93,8 @@ namespace HOP.Storage.DropBox
 
             foreach (var el in storage_dir.GetElements() )
             {
+                //var ne = new NameEncoder.NameEncoder();
+
                 dir_list.Add(el.GetName());
             }
             return dir_list;

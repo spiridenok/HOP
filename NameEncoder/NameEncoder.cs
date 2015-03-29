@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("NameEncoderTest")]
+[assembly: InternalsVisibleTo("GuiModel")]
 
 namespace HOP.NameEncoder
 {
@@ -19,13 +20,18 @@ namespace HOP.NameEncoder
 
             for (byte i = 0; i < bytes.Length; i++ )
             {
+                if (bytes[i] == 46)
+                    break;
                 if (i % 2 == 0)
                 {
-                    bytes[i] += i;
-                }
-                else
-                {
-                    bytes[i] -= i;
+                    if (i % 3 == 0)
+                    {
+                        bytes[i] += i;
+                    }
+                    else
+                    {
+                        bytes[i] -= i;
+                    }
                 }
             }
             return System.Text.Encoding.Unicode.GetString(bytes);
@@ -39,11 +45,16 @@ namespace HOP.NameEncoder
             {
                 if (i % 2 == 0)
                 {
-                    bytes[i] -= i;
-                }
-                else
-                {
-                    bytes[i] += i;
+                    if (bytes[i] == 46 && bytes[i+1] == 0)
+                        break;
+                    if (i % 3 == 0)
+                    {
+                        bytes[i] -= i;
+                    }
+                    else
+                    {
+                        bytes[i] += i;
+                    }
                 }
             }
             return System.Text.Encoding.Unicode.GetString(bytes);
