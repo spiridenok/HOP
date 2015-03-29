@@ -54,37 +54,6 @@ namespace HOP.Storage.DropBox
             return new DropBoxStorageDir( dropBoxStorage.GetRoot() );
         }
 
-        public void UploadFiles(List<Tuple<List<string>, string>> files_to_upload)
-        {
-            foreach( var file in files_to_upload )
-            {
-                string drop_box_dir = "";
-                var ne = new NameEncoder.NameEncoder();
-
-                foreach( var st in file.Item1 )
-                {
-                    // TODO: this needs to be cleaned up
-                    if (!st.StartsWith("/") && st != "")
-                        drop_box_dir += "/";
-                    drop_box_dir += st;
-
-                }
-
-                // Obfuscate the name
-                var file_name = file.Item2.Split('\\').Last();
-                var str = ne.Encode(file_name);
-                var new_file_path = file.Item2.Replace(file_name, str);
-                //System.IO.File.Copy(file.Item2, new_file_path, true);
-
-                // Encrypt the file
-                var enc = new TwoFishEncryption(conf);
-                byte[] encrypted_file = enc.Encrypt(File.ReadAllBytes(file.Item2));
-                File.WriteAllBytes(new_file_path, encrypted_file);
-
-                dropBoxStorage.UploadFile(new_file_path, dropBoxStorage.GetFolder(drop_box_dir));
-            }
-        }
-
         public void ClearDir(string dir_name)
         {
             var storage_dir = dropBoxStorage.GetFolder("/" + dir_name, throwException: false);
@@ -104,7 +73,7 @@ namespace HOP.Storage.DropBox
 
             foreach (var el in storage_dir.GetElements() )
             {
-                dir_list.Add(new StorageObject.StorageObject( storage_dir.GetName(), el.GetName() ));
+                dir_list.Add(new StorageObject.StorageObject( storage_dir.GetName(), el.GetName(), el.IsDir() ));
             }
             return dir_list;
         }

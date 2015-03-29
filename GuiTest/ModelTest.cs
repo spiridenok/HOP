@@ -16,10 +16,12 @@ namespace GuiTest
         class TestStorageDir : IStorageDir
         {
             public string name;
+
             public TestStorageDir(string name)
             {
                 this.name = name;
             }
+            public bool IsDir() { return true; }
 
             public string GetName()
             {

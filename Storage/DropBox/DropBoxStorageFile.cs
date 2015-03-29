@@ -12,6 +12,8 @@ namespace HOP.Storage.DropBox
     {
         ICloudFileSystemEntry file;
 
+        public bool IsDir() { return false; }
+
         public DropBoxStorageFile( ICloudFileSystemEntry file )
         {
             this.file = file;

@@ -8,5 +8,6 @@ namespace HOP.Storage.API
     interface IStorageElement
     {
         string GetName();
+        bool IsDir();
     }
 }

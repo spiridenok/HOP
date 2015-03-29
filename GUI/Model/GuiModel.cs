@@ -36,7 +36,8 @@ namespace HOP.GUI.Model
 
             foreach (var el in storage_root_dir.GetElements())
             {
-                root_dir.Add(el.GetName(), null);
+                var so = new StorageObject.StorageObject(storage_root_dir.GetName(), el.GetName(), el.IsDir() );
+                root_dir.Add(so.getFilePath(), null);
             }
 
             return root_dir;

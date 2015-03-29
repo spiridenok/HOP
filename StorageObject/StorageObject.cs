@@ -24,9 +24,17 @@ namespace HOP.StorageObject
             encrypted_file_path = null;
         }
 
-        public StorageObject(string storage_dir, string storage_file_name)
+        public StorageObject(string storage_dir, string storage_file_name, bool is_dir)
         {
-            this.file_path = null;
+            if (!is_dir)
+            {
+                var ne = new NameEncoder.NameEncoder();
+                this.file_path = ne.Decode(storage_file_name);
+            }
+            else
+            {
+                this.file_path = storage_file_name;
+            }
             this.storage_dir = new List<string>(){storage_file_name};
             encrypted_file_path = null;
         }
