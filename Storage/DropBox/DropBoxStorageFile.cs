@@ -19,9 +19,7 @@ namespace HOP.Storage.DropBox
 
         public string GetName()
         {
-            var ne = new NameEncoder.NameEncoder();
-
-            return ne.Decode(file.Name);
+            return file.Name;
         }
     }
 }

@@ -5,6 +5,8 @@ using HOP.Storage.API;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using HOP.StorageObject.API;
+using HOP.StorageObject;
 
 namespace GuiTest
 {
@@ -51,13 +53,16 @@ namespace GuiTest
                 return new TestStorageDir("root dir");
             }
 
-            public List<Tuple<List<string>, string>> files_to_upload;
+            public List<IStorageObject> files_to_upload;
             public void UploadFiles(List<Tuple<List<string>, string>> files_to_upload)
+            {
+            }
+            public void UploadFiles(List<IStorageObject> files_to_upload)
             {
                 this.files_to_upload = files_to_upload;
             }
 
-            public List<string> GetDirListing(string dir_name)
+            public List<IStorageObject> GetDirListing(string dir_name)
             {
                 return null;
             }
@@ -117,10 +122,12 @@ namespace GuiTest
             model.Upload();
 
             Assert.AreEqual(2, test_storage.files_to_upload.Count );
-            Assert.IsTrue(test_storage.files_to_upload.Exists(
-                                        e => e.Item1.Equals( h_file_1 ) && e.Item2.Equals( path_file_1 ) ) );
-            Assert.IsTrue(test_storage.files_to_upload.Exists(
-                                        e => e.Item1.Equals( h_file_2 ) && e.Item2.Equals( path_file_2 ) ) );
+
+            var test_so_1 = new StorageObject(h_file_1, path_file_1);
+            var test_so_2 = new StorageObject(h_file_2, path_file_2);
+
+            Assert.IsTrue(test_storage.files_to_upload.Exists( e => e.Equals(test_so_1) ) );
+            Assert.IsTrue(test_storage.files_to_upload.Exists( e => e.Equals(test_so_2) ) );
 
             model.Upload();
             Assert.AreEqual(0, test_storage.files_to_upload.Count);

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("NameEncoderTest")]
-[assembly: InternalsVisibleTo("GuiModel")]
 
 namespace HOP.NameEncoder
 {

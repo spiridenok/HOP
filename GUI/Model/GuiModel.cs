@@ -8,18 +8,19 @@ using System.Text;
 
 // TODO: this should be replaced by the interface & dep. injection
 using HOP.NameEncoder;
+using HOP.StorageObject.API;
 
 namespace HOP.GUI.Model
 {
     class GuiModel: IModel
     {
         IStorage storage;
-        List<Tuple<List<string>, string>> files_to_upload;
+        List<IStorageObject> files_to_upload;
 
         public GuiModel( IStorage storage )
         {
             this.storage = storage;
-            files_to_upload = new List<Tuple<List<string>,string>>();
+            files_to_upload = new List<IStorageObject>();
         }
 
         public Dictionary<string, List<string>> Connect()
@@ -43,13 +44,13 @@ namespace HOP.GUI.Model
 
         public void AddFileToUpload( List<string> hierarchy, string path_to_file)
         {
-            files_to_upload.Add(new Tuple<List<string>, string>(hierarchy, path_to_file));
+            files_to_upload.Add(new StorageObject.StorageObject(hierarchy, path_to_file));
         }
 
         public void Upload()
         {
             storage.UploadFiles(files_to_upload);
-            files_to_upload = new List<Tuple<List<string>, string>>();
+            files_to_upload = new List<IStorageObject>();
         }
 
         public bool IsDirectory(string name)

@@ -7,6 +7,8 @@ using HOP.Storage.DropBox;
 using HOP.Config;
 using System.Collections.Generic;
 using HOP.Config.API;
+using HOP.StorageObject;
+using HOP.StorageObject.API;
 
 namespace DropBoxStorageTest
 {
@@ -43,6 +45,28 @@ namespace DropBoxStorageTest
             storage.CloseConnection();
         }
 
+        // TODO: check why this test fails when executed with other tests
+        [TestMethod]
+        public void TestUpload()
+        {
+            storage.ClearDir("/Test");
+            storage.CreateDir("/Test/SubTest");
+
+            List<string> storage_dir = new []{"Test"}.ToList();
+            storage_dir = new List<string>{ "Test", "SubTest" };
+            var f1 = new StorageObject(storage_dir, @"..\..\test.txt"); 
+            var f2 = new StorageObject(storage_dir, @"..\..\test.exe");
+
+            var files_to_upload = new List<IStorageObject>(){f1,f2};
+
+            storage.UploadFiles(files_to_upload);
+
+            // TODO: this test case creates temp files which should not be created at all.
+            // Currently they are just ignored with .gitignore. 
+            Assert.IsTrue(storage.GetDirListing("/Test").Exists( e => e.getStoragePath().Equals( f1.getEncryptedFilePath().Replace(@"..\..\", "/") ) ) );
+            Assert.IsTrue(storage.GetDirListing("/Test/SubTest").Exists( e => e.getStoragePath().Equals( f2.getEncryptedFilePath().Replace(@"..\..\", "/") ) ) );
+        }
+
         [TestMethod]
         public void TestRootDir()
         {
@@ -57,26 +81,6 @@ namespace DropBoxStorageTest
 
             Assert.IsTrue(root_elements.Any(el => (el is IStorageDir)));
             Assert.IsTrue(root_elements.Any(el => (el is IStorageFile)));
-        }
-
-        // TODO: check why this test fails when executed with other tests
-        [TestMethod]
-        public void TestUpload()
-        {
-            storage.ClearDir("/Test");
-            storage.CreateDir("/Test/SubTest");
-
-            var files_to_upload = new List<Tuple<List<string>, string>>();
-            List<string> storage_dir = new []{"Test"}.ToList();
-            files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.txt") );
-
-            storage_dir = new List<string>{ "Test", "SubTest" };
-            files_to_upload.Add(new Tuple<List<string>, string>(storage_dir, "../../test.exe"));
-
-            storage.UploadFiles(files_to_upload);
-
-            Assert.IsTrue( storage.GetDirListing("/Test").Contains( "test.txt" ) );
-            Assert.IsTrue( storage.GetDirListing("/Test/SubTest").Contains( "test.exe" ) );
         }
 
         [TestMethod]

@@ -13,6 +13,7 @@ using HOP.Config.API;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using HOP.Encryption;
+using HOP.StorageObject.API;
 [assembly: InternalsVisibleTo("DropBoxStorageTest")]
 
 namespace HOP.Storage.DropBox
@@ -92,20 +93,19 @@ namespace HOP.Storage.DropBox
 
             foreach( var el in GetDirListing( dir_name ) )
             {
-                dropBoxStorage.DeleteFileSystemEntry( dropBoxStorage.GetFileSystemObject( el, storage_dir ) );
+                //dropBoxStorage.DeleteFileSystemEntry( dropBoxStorage.GetFileSystemObject( el, storage_dir ) );
             }
         }
 
-        public List<string> GetDirListing( string dir_name )
+        public List<IStorageObject> GetDirListing( string dir_name )
         {
-            List<string> dir_list = new List<string>();
+            var dir_list = new List<IStorageObject>();
             var storage_dir = new DropBoxStorageDir( dropBoxStorage.GetFolder(dir_name) );
 
             foreach (var el in storage_dir.GetElements() )
             {
                 //var ne = new NameEncoder.NameEncoder();
-
-                dir_list.Add(el.GetName());
+                dir_list.Add(new StorageObject.StorageObject( storage_dir.GetName(), el.GetName() ));
             }
             return dir_list;
         }
@@ -117,10 +117,7 @@ namespace HOP.Storage.DropBox
 
         public bool IsDirectory(string name)
         {
-            var ne = new NameEncoder.NameEncoder();
-            var str = ne.Encode(name);
-
-            var el = dropBoxStorage.GetFileSystemObject(str, dropBoxStorage.GetFolder("/"));
+            var el = dropBoxStorage.GetFileSystemObject(name, dropBoxStorage.GetFolder("/"));
             return el is ICloudDirectoryEntry;
         }
 
@@ -141,6 +138,27 @@ namespace HOP.Storage.DropBox
             File.WriteAllBytes(file_path, decrypted_file);
 
             File.Delete(tmp + str);
+        }
+
+        public void UploadFiles(List<IStorageObject> files_to_upload)
+        {
+            foreach( var storage_object in files_to_upload )
+            {
+                var ne = new NameEncoder.NameEncoder();
+
+                // Obfuscate the name
+                //var file_name = file.Item2.Split('\\').Last();
+                //var str = ne.Encode(file_name);
+                //var new_file_path = file.Item2.Replace(file_name, str);
+
+                // Encrypt the file
+                //var enc = new TwoFishEncryption(conf);
+                //byte[] encrypted_file = enc.Encrypt(File.ReadAllBytes(file.Item2));
+                //File.WriteAllBytes(new_file_path, encrypted_file);
+
+                //dropBoxStorage.UploadFile(new_file_path, dropBoxStorage.GetFolder(drop_box_dir));
+                dropBoxStorage.UploadFile(storage_object.getEncryptedFilePath(), dropBoxStorage.GetFolder(storage_object.getStoragePath()));
+            }
         }
     }
 }

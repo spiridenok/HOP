@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,6 +63,8 @@
     <Compile Include="NameEncoder\API\INameEncoder.cs" />
     <Compile Include="NameEncoder\NameEncoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StorageObject\API\IStorageObject.cs" />
+    <Compile Include="StorageObject\StorageObject.cs" />
     <Compile Include="Storage\API\GetDirListing.cs" />
     <Compile Include="Storage\API\IStorage.cs" />
     <Compile Include="Storage\API\IStorageDir.cs" />
