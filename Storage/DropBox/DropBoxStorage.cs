@@ -104,7 +104,6 @@ namespace HOP.Storage.DropBox
 
             foreach (var el in storage_dir.GetElements() )
             {
-                //var ne = new NameEncoder.NameEncoder();
                 dir_list.Add(new StorageObject.StorageObject( storage_dir.GetName(), el.GetName() ));
             }
             return dir_list;
@@ -144,20 +143,7 @@ namespace HOP.Storage.DropBox
         {
             foreach( var storage_object in files_to_upload )
             {
-                var ne = new NameEncoder.NameEncoder();
-
-                // Obfuscate the name
-                //var file_name = file.Item2.Split('\\').Last();
-                //var str = ne.Encode(file_name);
-                //var new_file_path = file.Item2.Replace(file_name, str);
-
-                // Encrypt the file
-                //var enc = new TwoFishEncryption(conf);
-                //byte[] encrypted_file = enc.Encrypt(File.ReadAllBytes(file.Item2));
-                //File.WriteAllBytes(new_file_path, encrypted_file);
-
-                //dropBoxStorage.UploadFile(new_file_path, dropBoxStorage.GetFolder(drop_box_dir));
-                dropBoxStorage.UploadFile(storage_object.getEncryptedFilePath(), dropBoxStorage.GetFolder(storage_object.getStoragePath()));
+                dropBoxStorage.UploadFile(storage_object.encryptFile(conf), dropBoxStorage.GetFolder(storage_object.getStoragePath()));
             }
         }
     }

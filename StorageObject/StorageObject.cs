@@ -4,6 +4,8 @@ using HOP.StorageObject.API;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using HOP.Config.API;
+using System.IO;
 
 [assembly: InternalsVisibleTo("DropBoxStorageTest")]
 
@@ -88,6 +90,15 @@ namespace HOP.StorageObject
             //var enc = new TwoFishEncryption(conf);
             //byte[] encrypted_file = enc.Encrypt(File.ReadAllBytes(file.Item2));
             //File.WriteAllBytes(new_file_path, encrypted_file);
+            return encrypted_file_path;
+        }
+
+        public string encryptFile(IConfiguration conf)
+        {
+            var enc = new TwoFishEncryption(conf);
+            byte[] encrypted_file = enc.Encrypt(File.ReadAllBytes(getEncryptedFilePath()));
+            File.WriteAllBytes(encrypted_file_path, encrypted_file);
+
             return encrypted_file_path;
         }
     }

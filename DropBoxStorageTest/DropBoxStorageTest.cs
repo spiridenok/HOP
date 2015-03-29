@@ -21,7 +21,7 @@ namespace DropBoxStorageTest
 
         public string GetKeyFilePath()
         {
-            throw new NotImplementedException();
+            return @"..\..\TwoFish.Key";
         }
     }
 

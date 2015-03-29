@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using HOP.Config.API;
+using System.Collections.Generic;
 
 namespace HOP.StorageObject.API
 {
@@ -9,5 +10,7 @@ namespace HOP.StorageObject.API
 
         string getFilePath();
         string getEncryptedFilePath();
+
+        string encryptFile(IConfiguration conf);
     }
 }
